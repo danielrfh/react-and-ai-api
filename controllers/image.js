@@ -44,17 +44,34 @@ const returnClarifaiRequestOptions = (imageUrl) => {
 const handleApiCall = () => (req, res) => {
   // Change these to whatever model and image URL you want to use
   const MODEL_ID = "face-detection";
-  // app.models.predict(MODEL_ID, this.state.input)
+  // app.models.predict(MODEL_ID, this.state.input) <- Old API
+
   // NOTE: MODEL_VERSION_ID is optional, you can also call prediction with the MODEL_ID only
   // https://api.clarifai.com/v2/models/{YOUR_MODEL_ID}/outputs
   // this will default to the latest version_id
 
+  // Call Clarifai API using the URL on this.state.input
   fetch(
     "https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs",
     returnClarifaiRequestOptions(req.body.input)
   )
+    // Fetch does not directly return the JSON response body but instead
+    // returns a promise that resolves with a Response object.
     .then((data) => {
-      res.json(data);
+      // console.log(response);
+
+      // The Response object, in turn, does not directly contain the
+      // actual JSON response body but is instead a representation of
+      // the entire HTTP response. So, to extract the JSON body content
+      // from the Response object, we use the json() method, which
+      // returns a second promise that resolves with the result of
+      // parsing the response body text as JSON
+
+      data.json().then((data) => {
+        // Access the object in the 'data' variable
+        // console.log(this.calculateFaceLocation(data));
+        res.json(data);
+      });
     })
     .catch((err) => res.status(400).json("unable to work with API"));
 };
