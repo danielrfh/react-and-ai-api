@@ -1,3 +1,8 @@
+/**
+ * Returns the request options object for making a Clarifai API request.
+ * @param {string} imageUrl - The URL of the image to analyze.
+ * @returns {object} The request options object.
+ */
 const returnClarifaiRequestOptions = (imageUrl) => {
   ///////////////////////////////////////////////////////////////////////////////////////////////////
   // In this section, we set the user authentication, user and app ID, model details, and the URL
@@ -41,6 +46,12 @@ const returnClarifaiRequestOptions = (imageUrl) => {
   return requestOptions;
 };
 
+/**
+ * Handles an API call by sending a request and responding with the received data.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns None
+ */
 const handleApiCall = () => (req, res) => {
   // Change these to whatever model and image URL you want to use
   const MODEL_ID = "face-detection";
@@ -76,6 +87,11 @@ const handleApiCall = () => (req, res) => {
     .catch((err) => res.status(400).json("unable to work with API"));
 };
 
+/**
+ * Handles the request to increment the "entries" count for a user in the database.
+ * @param {Object} db - The database object.
+ * @returns {Function} - The request handler function.
+ */
 const handleImage = (db) => (req, res) => {
   const { id } = req.body;
   db("users")

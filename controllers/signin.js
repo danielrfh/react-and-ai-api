@@ -1,3 +1,11 @@
+/**
+ * Handles the sign-in process by checking the provided email and password against the
+ * database and returning a response based on the result.
+ * @param {object} db - The database object used to query the login table.
+ * @param {object} bcrypt - The bcrypt object used to compare the password hash.
+ * @returns {function} A function that takes in the request and response objects and
+ * performs the sign-in process.
+ */
 const handleSignin = (db, bcrypt) => (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {

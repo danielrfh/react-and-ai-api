@@ -1,3 +1,8 @@
+/**
+ * Handles the GET request for retrieving a user profile from the database.
+ * @param {Object} db - The database object used for querying.
+ * @returns {Function} - The request handler function.
+ */
 const handleProfileGet = (db) => (req, res) => {
   const { id } = req.params;
   // let found = false;

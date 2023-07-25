@@ -1,3 +1,9 @@
+/**
+ * Handles the registration process for a user.
+ * @param {Object} db - The database object.
+ * @param {Object} bcrypt - The bcrypt object for password hashing.
+ * @returns {Function} - A function that handles the registration request.
+ */
 const handleRegister = (db, bcrypt) => (req, res) => {
   const { email, name, password } = req.body;
   if (!email || !name || !password) {

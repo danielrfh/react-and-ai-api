@@ -38,6 +38,17 @@ const image = require("./controllers/image");
 //   },
 // ];
 
+/**
+ * Creates a new instance of a Knex database connection.
+ * @param {object} options - The configuration options for the database connection.
+ * @param {string} options.client - The database client to use (e.g. "pg" for PostgreSQL).
+ * @param {object} options.connection - The connection details for the database.
+ * @param {string} options.connection.host - The host of the database server.
+ * @param {number} options.connection.port - The port number of the database server.
+ * @param {string} options.connection.user - The username for the database connection.
+ * @param {string} options.connection.password - The password for the database connection.
+ * @param {string} options.connection.database - The name
+ */
 const db = knex({
   client: "pg",
   connection: {
