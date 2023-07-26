@@ -3,6 +3,7 @@ const app = express();
 const bcrypt = require("bcrypt-nodejs");
 const cors = require("cors");
 const knex = require("knex");
+const morgan = require("morgan");
 
 const register = require("./controllers/register");
 const signin = require("./controllers/signin");
@@ -51,22 +52,24 @@ const image = require("./controllers/image");
  */
 const db = knex({
   client: "pg",
-  connection: {
-    host: "127.0.0.1",
-    port: 5432,
-    user: "dan",
-    password: "",
-    database: "smart-brain",
-  },
+  // connection: {
+  //   host: process.env.POSTGRES_HOST,
+  //   port: 5432,
+  //   user: process.env.POSTGRES_USER,
+  //   password: process.env.POSTGRES_PASSWORD,
+  //   database: process.env.POSTGRES_DB,
+  // },
+  connection: process.env.POSTGRES_URI,
 });
 
-db.select("*")
-  .from("users")
-  .then((data) => {
-    console.log(data);
-  });
+// db.select("*")
+//   .from("users")
+//   .then((data) => {
+//     console.log(data);
+//   });
 
 app.use(express.json());
+app.use(morgan("combined"));
 app.use(cors());
 
 // Test root end point by retrieving all users from the database

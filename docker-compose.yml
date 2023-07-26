@@ -1,0 +1,26 @@
+version: "3.4"
+
+services:
+  # Backend API
+  react-and-ai-api:
+    container_name: backend
+    build: ./
+    command: npm start
+    working_dir: /usr/src/react-and-ai-api
+    environment:
+      POSTGRES_URI: postgres://dan:secret@postgres:5432/react-and-ai-db
+    ports:
+      - 4000:4000
+    volumes:
+      - ./:/usr/src/react-and-ai-api
+
+  # Postgres
+  postgres:
+    environment:
+      POSTGRES_USER: dan
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: react-and-ai-db
+      POSTGRES_HOST: postgres
+    build: ./postgres
+    ports:
+      - 5432:5432
